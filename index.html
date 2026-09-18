@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pindorama — o Brasil antes do Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --clay: #A6431F;
+    --clay-deep: #7A3115;
+    --earth-black: #211C17;
+    --bark: #4B4033;
+    --sand: #E9DEC6;
+    --sand-soft: #F4EEDD;
+    --moss: #3C5B45;
+    --moss-deep: #294036;
+    --ochre: #C68A2E;
+    --bone: #FBF7EC;
+    --line: rgba(33,28,23,0.16);
+
+    --bg: var(--bone);
+    --bg-panel: var(--sand-soft);
+    --text: #3B2720;
+    --text-soft: #6A4A3C;
+    --accent: var(--clay);
+    --accent-deep: var(--clay-deep);
+    --accent-2: var(--moss);
+    --hairline: var(--line);
+  }
+
+  @media (prefers-color-scheme: dark) and (max-width:0px){
+    :root:not([data-theme="light"]){
+      --bg: #17140F;
+      --bg-panel: #1F1B14;
+      --text: #F1E9D8;
+      --text-soft: #C9BDA4;
+      --accent: #E0703C;
+      --accent-deep: #F2925F;
+      --accent-2: #7FA085;
+      --hairline: rgba(241,233,216,0.14);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #17140F;
+    --bg-panel: #1F1B14;
+    --text: #F1E9D8;
+    --text-soft: #C9BDA4;
+    --accent: #E0703C;
+    --accent-deep: #F2925F;
+    --accent-2: #7FA085;
+    --hairline: rgba(241,233,216,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Work Sans', -apple-system, sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    margin:0;
+    color:var(--text);
+    letter-spacing:-0.01em;
+  }
+
+  a{color:inherit;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:#A6431F;
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.22);
+    color:#FFF8F3;
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .nav-mark{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;
+    display:flex; align-items:center; gap:10px;
+  }
+  .nav-mark svg{width:22px; height:22px; flex:none;}
+  .nav-links{display:flex; gap:28px; font-size:0.92rem; color:#FFF8F3;}
+  .nav-links a{text-decoration:none; transition:color .2s;}
+  .nav-links a:hover{color:#F2D1C4;}
+  .nav-links{display:none;}
+  @media (min-width:760px){ .nav-links{display:flex;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 76px;
+    overflow:hidden;
+    border-bottom:1px solid var(--hairline);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:center;
+  }
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .eyebrow-plain{
+    color:var(--accent-deep);
+    font-size:0.98rem;
+    margin-bottom:18px;
+    font-style:italic;
+    font-family:'Fraunces', serif;
+  }
+  .hero h1{
+    font-size:clamp(3rem, 8vw, 5.6rem);
+    line-height:0.96;
+    margin-bottom:24px;
+  }
+  .hero p.lede{
+    font-size:1.15rem;
+    color:var(--text-soft);
+    max-width:46ch;
+    margin-bottom:8px;
+  }
+  .hero-art{
+    aspect-ratio:1/1;
+    border-radius:2px;
+  }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:88px 0;}
+  section.tinted{background:var(--bg-panel); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);}
+  .section-head{
+    display:grid; grid-template-columns:1fr 1.4fr; gap:40px; margin-bottom:56px; align-items:end;
+  }
+  @media (max-width:760px){ .section-head{grid-template-columns:1fr;} }
+  .section-num{
+    font-family:'Fraunces', serif; font-style:italic; color:var(--accent);
+    font-size:1.05rem;
+  }
+  .section-head h2{font-size:clamp(2rem, 4vw, 2.7rem); margin-top:6px;}
+  .section-head .desc{color:var(--text-soft); font-size:1.02rem; max-width:52ch;}
+
+  /* ---------- HISTORY (intro) ---------- */
+  .history-body{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px;
+  }
+  @media (max-width:760px){ .history-body{grid-template-columns:1fr;} }
+  .history-body p{margin:0 0 18px; color:var(--text-soft);}
+  .history-body p strong{color:var(--text); font-weight:600;}
+  .stat-row{
+    display:flex; gap:34px; margin-top:28px; flex-wrap:wrap;
+  }
+  .stat{border-left:2px solid var(--accent); padding-left:14px;}
+  .stat b{
+    display:block; font-family:'Fraunces', serif; font-size:1.9rem; font-weight:600;
+  }
+  .stat span{font-size:0.86rem; color:var(--text-soft);}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative; margin-top:8px;}
+  .timeline::before{
+    content:"";
+    position:absolute; left:120px; top:6px; bottom:6px; width:1px;
+    background:var(--hairline);
+  }
+  @media (max-width:640px){ .timeline::before{left:20px;} }
+  .tl-item{
+    display:grid; grid-template-columns:120px 1fr; gap:32px;
+    position:relative; padding:26px 0;
+    border-top:1px solid var(--hairline);
+  }
+  .tl-item:first-child{border-top:none;}
+  @media (max-width:640px){
+    .tl-item{grid-template-columns:1fr; padding-left:44px;}
+  }
+  .tl-date{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;
+    color:var(--accent-deep); padding-top:2px;
+  }
+  .tl-dot{
+    position:absolute; left:116px; top:34px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 4px var(--bg);
+  }
+  section.tinted .tl-dot{box-shadow:0 0 0 4px var(--bg-panel);}
+  @media (max-width:640px){ .tl-dot{left:16px;} }
+  .tl-content h3{font-size:1.18rem; margin-bottom:6px; font-weight:600;}
+  .tl-content p{margin:0; color:var(--text-soft); max-width:60ch;}
+
+  /* ---------- ARTS GRID ---------- */
+  .arts-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--hairline);
+    border:1px solid var(--hairline);
+  }
+  @media (max-width:860px){ .arts-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .arts-grid{grid-template-columns:1fr;} }
+  .art-card{
+    background:var(--bg);
+    padding:34px 30px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  section.tinted .art-card{background:var(--bg-panel);}
+  .art-card .icon{width:44px; height:44px; color:var(--accent);}
+  .art-card h3{font-size:1.15rem; font-weight:600;}
+  .art-card p{margin:0; color:var(--text-soft); font-size:0.96rem;}
+
+  /* ---------- PEOPLES / LANGUAGE FAMILIES ---------- */
+  .peoples{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:24px;
+  }
+  @media (max-width:860px){ .peoples{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:480px){ .peoples{grid-template-columns:1fr;} }
+  .people-card{
+    border-top:2px solid var(--accent-2);
+    padding-top:16px;
+  }
+  .people-card h4{font-size:1.05rem; margin-bottom:8px; font-weight:600;}
+  .people-card p{margin:0; color:var(--text-soft); font-size:0.92rem;}
+
+  /* ---------- LEGACY / CLOSING ---------- */
+  .legacy{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;
+  }
+  @media (max-width:760px){ .legacy{grid-template-columns:1fr;} }
+  .legacy p{color:var(--text-soft); margin:0 0 16px;}
+  .legacy-quote{
+    font-family:'Fraunces', serif; font-style:italic;
+    font-size:1.5rem; line-height:1.4; color:var(--text);
+    border-left:2px solid var(--accent); padding-left:24px;
+  }
+
+  footer{
+    padding:44px 0 60px;
+    border-top:1px solid var(--hairline);
+    color:var(--text-soft); font-size:0.85rem;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+
+  .divider{
+    display:flex; justify-content:center; padding:6px 0 0;
+    color:var(--accent);
+    opacity:0.7;
+  }
+  .divider svg{width:120px; height:16px;}
+
+  /* ---------- GALERIA VISUAL ---------- */
+  .art-photo{width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border-bottom:1px solid var(--hairline);}
+  .art-card.with-photo{padding:0; overflow:hidden;}
+  .art-card.with-photo .art-copy{padding:26px 30px 32px; display:flex; flex-direction:column; gap:12px;}
+  .art-card.with-photo .photo-credit{font-size:.74rem; color:var(--text-soft); opacity:.8; margin-top:2px;}
+  .visual-gallery{display:grid; grid-template-columns:1.25fr .75fr; gap:18px; margin:0 0 46px;}
+  .visual-gallery figure{margin:0; position:relative; overflow:hidden; background:var(--bg-panel); border:1px solid var(--hairline);}
+  .visual-gallery img{width:100%; height:100%; min-height:280px; object-fit:cover; display:block;}
+  .visual-gallery figcaption{position:absolute; left:0; right:0; bottom:0; padding:34px 18px 14px; color:#fff; font-size:.82rem; background:linear-gradient(transparent,rgba(0,0,0,.72));}
+  @media(max-width:700px){.visual-gallery{grid-template-columns:1fr}.visual-gallery img{min-height:230px}}
+
+  /* ---------- IMAGENS NAS ARTES ---------- */
+  .art-visual{width:100%; aspect-ratio:16/10; overflow:hidden; border:1px solid var(--hairline); background:var(--sand); margin-bottom:4px;}
+  .art-visual svg,.art-visual img{width:100%;height:100%;display:block;object-fit:cover;}
+  .art-caption{font-size:.76rem;color:var(--text-soft);font-style:italic;margin-top:-7px;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="nav-mark">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 8v8l8 6 8-6V8l-8-6z" stroke="currentColor" stroke-width="1.4"/><path d="M12 2v20M4 8l8 5 8-5" stroke="currentColor" stroke-width="1.1"/></svg>
+      Pindorama
+    </div>
+    <nav class="nav-links">
+      <a href="#historia">História</a>
+      <a href="#linha-do-tempo">Acontecimentos</a>
+      <a href="#artes">Artes</a>
+      <a href="#povos">Povos</a>
+      <a href="#legado">Legado</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-plain">Antes de existir um nome português para esta terra</div>
+      <h1>Pindorama</h1>
+      <p class="lede">Milhares de anos de histórias, línguas, guerras, alianças, cerâmicas e pinturas se acumularam neste território antes de 1500 — o ano em que os europeus começaram a chamá-lo de outra coisa.</p>
+      <p class="lede">Este site reúne o que a arqueologia e a tradição oral revelam sobre o período pré-colonial: sua história, seus principais acontecimentos e suas artes.</p>
+    </div>
+    <svg class="hero-art" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="400" fill="none"/>
+      <g stroke="var(--accent)" stroke-width="2">
+        <path d="M50 350 C 50 200, 150 200, 150 100 C 150 40, 220 40, 220 100" fill="none"/>
+        <path d="M90 350 C 90 220, 180 220, 180 130" fill="none" opacity="0.5"/>
+      </g>
+      <g fill="var(--accent-2)">
+        <circle cx="220" cy="100" r="7"/>
+        <circle cx="150" cy="100" r="5" opacity="0.7"/>
+      </g>
+      <g stroke="var(--ochre)" stroke-width="1.6" fill="none">
+        <path d="M260 60 l30 30 -30 30 -30 -30 z"/>
+        <path d="M260 60 l30 30 -30 30 -30 -30 z" transform="translate(0,90)"/>
+        <path d="M260 60 l30 30 -30 30 -30 -30 z" transform="translate(0,180)"/>
+      </g>
+      <g stroke="var(--text)" stroke-width="1.2" opacity="0.55" fill="none">
+        <path d="M60 60 q20 -20 40 0 t40 0 t40 0 t40 0" />
+        <path d="M60 90 q20 -20 40 0 t40 0" />
+      </g>
+      <g stroke="var(--bark)" stroke-width="1" opacity="0.4">
+        <rect x="30" y="250" width="18" height="18" transform="rotate(45 39 259)"/>
+        <rect x="60" y="250" width="18" height="18" transform="rotate(45 69 259)"/>
+        <rect x="90" y="250" width="18" height="18" transform="rotate(45 99 259)"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ===================== HISTÓRIA ===================== -->
+<section id="historia">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">01 — Panorama</div>
+        <h2>Uma história muito mais longa do que parece</h2>
+      </div>
+      <p class="desc">A presença humana no território que hoje é o Brasil remonta a, no mínimo, <strong>12 mil anos</strong>, segundo o consenso arqueológico — e sítios como o Boqueirão da Pedra Furada e a Serra da Capivara, no Piauí, sugerem datas ainda mais antigas, defendidas por parte dos pesquisadores. Esses primeiros grupos chegaram por rotas migratórias que ainda são debatidas, deslocando-se aos poucos por um continente até então sem presença humana.</p>
+    </div>
+    <div class="history-body">
+      <div>
+        <p>Ao longo dos milênios seguintes, esses grupos se diversificaram em centenas de povos distintos, com línguas, territórios, formas de organização social e tradições próprias. Não existiu uma "civilização única" no Brasil pré-colonial, da mesma forma que não existe uma "cultura europeia única" — existiu uma paisagem humana extremamente plural.</p>
+        <p>Por volta do ano 1500, estima-se que viviam no território hoje brasileiro entre <strong>2 e 6 milhões de pessoas</strong>, divididas em centenas de etnias e famílias linguísticas. Elas praticavam agricultura de coivara, pesca, caça, manejo florestal e, em algumas regiões — como a Amazônia central —, formas de organização social que hoje intrigam arqueólogos pela sua escala e complexidade.</p>
+      </div>
+      <div>
+        <div class="stat-row">
+          <div class="stat"><b>~20–25 mil</b><span>anos de arte rupestre na Serra da Capivara</span></div>
+          <div class="stat"><b>1000 anos</b><span>de cerâmica marajoara (400–1400 d.C.)</span></div>
+          <div class="stat"><b>300+</b><span>povos indígenas no Brasil atual</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 120 16"><path d="M0 8 Q15 0 30 8 T60 8 T90 8 T120 8" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+</div>
+
+<!-- ===================== LINHA DO TEMPO ===================== -->
+<section id="linha-do-tempo" class="tinted">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">02 — Cronologia</div>
+        <h2>Acontecimentos que marcaram este longo período</h2>
+      </div>
+      <p class="desc">Uma seleção de marcos discutidos por arqueólogos e historiadores, da chegada dos primeiros grupos humanos até a virada de 1500.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">~25.000 a.C.</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Primeiros sinais de ocupação na Serra da Capivara</h3>
+          <p>Pesquisas lideradas pela arqueóloga Niède Guidon no Parque Nacional da Serra da Capivara (PI) identificaram vestígios — carvões, ferramentas e pinturas — que alguns estudos datam em até 20 a 25 mil anos, uma data que contesta o modelo tradicional de povoamento das Américas pelo Estreito de Bering.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">~12.000 a.C.</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Data mais aceita para o povoamento do território</h3>
+          <p>O consenso arqueológico mais amplo situa a chegada humana ao atual território brasileiro há pelo menos 12 mil anos, com sítios como Lagoa Santa (MG) — onde foi encontrado o fóssil conhecido como "Luzia" — documentando essa presença antiga.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">~5000 a.C.</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Expansão da agricultura e da cerâmica</h3>
+          <p>Grupos ao longo dos grandes rios começam a cultivar mandioca e milho e a produzir cerâmica de forma sistemática, dando origem a tradições regionais que se desenvolveriam por milênios, da costa atlântica à bacia amazônica.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">400 – 1400 d.C.</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Apogeu da cultura marajoara</h3>
+          <p>Na Ilha de Marajó (PA), sociedades complexas constroem grandes aterros artificiais (tesos) e desenvolvem uma das tradições cerâmicas mais sofisticadas das Américas, com urnas funerárias e vasos ricamente decorados.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">700 – 1500 d.C.</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Sociedades complexas na Amazônia</h3>
+          <p>Pesquisas recentes revelam geoglifos, aldeias fortificadas e extensas áreas de "terra preta de índio" (solo enriquecido artificialmente) no Acre e em outras regiões amazônicas, indicando populações muito maiores e mais organizadas do que se supunha até poucas décadas atrás.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">Séc. XV</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Expansão tupi-guarani pelo litoral</h3>
+          <p>Povos de língua tupi-guarani consolidam sua presença por boa parte da costa atlântica, em meio a redes de guerra, aliança e comércio com povos de outras famílias linguísticas do interior, como os jê.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">22 de abril de 1500</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Chegada da esquadra de Pedro Álvares Cabral</h3>
+          <p>O contato com a expedição portuguesa marca, na historiografia tradicional, o fim simbólico do período pré-colonial — não o fim das culturas indígenas, mas o início de um novo e violento capítulo em sua história.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 120 16"><path d="M0 8 Q15 0 30 8 T60 8 T90 8 T120 8" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+</div>
+
+<!-- ===================== ARTES ===================== -->
+<section id="artes">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">03 — Expressão</div>
+        <h2>As artes do período pré-colonial</h2>
+      </div>
+      <p class="desc">Muito antes da noção europeia de "belas-artes", os povos originários já produziam objetos e imagens que uniam função, ritual e beleza — cada peça carregando o conhecimento de um povo inteiro.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="visual-gallery" aria-label="Galeria de arte pré-colonial brasileira">
+    </div>
+    <div class="arts-grid">
+      <div class="art-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none"><path d="M6 40c4-14 10-20 18-20s6 10 14 10 6-14 4-22" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="18" r="2" fill="currentColor"/><circle cx="30" cy="12" r="2" fill="currentColor"/></svg>
+        <h3>Pintura rupestre</h3>
+        <div class="art-visual"><img src="https://mais.opovo.com.br/_midias/jpg/2023/03/03/_mg_4850__1_-21301173.jpg" alt="Fotografia real de pinturas rupestres na Serra da Capivara, Piauí." loading="lazy"></div><div class="art-caption">Foto: Fco Fontenele / O POVO.</div>
+        <p>Feitas com pigmentos minerais sobre rocha, registram cenas de caça, dança, luta e rituais. A Serra da Capivara (PI) reúne uma das maiores concentrações de arte rupestre do mundo, com milhares de painéis catalogados.</p>
+      </div>
+
+      <div class="art-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none"><path d="M14 40h20l-3-24a7 7 0 00-14 0z" stroke="currentColor" stroke-width="2"/><path d="M16 20h16M17 28h14" stroke="currentColor" stroke-width="1.4"/></svg>
+        <h3>Cerâmica marajoara</h3>
+        <div class="art-visual"><img src="https://painel.portalamazonia.com/uploads/RTEmagicC_ceramica_marajoara_museu_do_rio_de_janeiro.jpg.jpg" alt="Fotografia de peça de cerâmica marajoara com grafismos geométricos." loading="lazy"></div><div class="art-caption">Peça real de tradição cerâmica marajoara.</div>
+        <p>Vasos, urnas funerárias e estatuetas produzidos na Ilha de Marajó entre 400 e 1400 d.C., decorados com padrões geométricos incisos e pintados representando animais e figuras humanas estilizadas.</p>
+      </div>
+
+      <div class="art-card with-photo">
+        <div class="art-copy">
+    <svg class="icon" viewBox="0 0 48 48" fill="none">
+      <path d="M32 10c-12 3-18 12-16 25 11-4 17-13 16-25zM16 35l13-19"
+            stroke="currentColor" stroke-width="2"/>
+    </svg>
+          <h3>Arte plumária</h3>
+        <div class="art-visual"><img src="https://www.cultura.sp.gov.br/wcm/connect/0ed9b1f3-5b92-4b70-91ae-3b3c97103e20/C%C3%B3pia%2Bde%2BInterna%2B2.jpg?CACHEID=ROOTWORKSPACE-0ed9b1f3-5b92-4b70-91ae-3b3c97103e20-pM0.BM-&MOD=AJPERES" alt="Fotografia de cocares e adornos de arte plumária indígena em exposição." loading="lazy"></div><div class="art-caption">Foto de peças reais de arte plumária em acervo indígena.</div>
+          <p>Cocares, mantos, braçadeiras e adornos feitos com penas de aves como arara e tucano, montados com técnicas de amarração e trançado transmitidas de geração em geração — um dos ofícios mais elaborados do continente.</p>
+        </div>
+      </div>
+
+      <div class="art-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none"><path d="M24 6a18 18 0 100 36 18 18 0 000-36z" stroke="currentColor" stroke-width="2"/><path d="M14 24h20M24 14v20" stroke="currentColor" stroke-width="1.4"/></svg>
+        <h3>Pintura corporal</h3>
+        <div class="art-visual"><img src="https://humansworld.org/pages/kayapo_33.jpg" alt="Fotografia de pintura corporal indígena com grafismos geométricos." loading="lazy"></div><div class="art-caption">Exemplo contemporâneo de tradição de pintura corporal indígena.</div>
+        <p>Feita com corantes vegetais como jenipapo e urucum, transformava a pele em superfície de identidade: indicava etnia, status social, momentos rituais e passagens da vida, como festas e cerimônias de guerra.</p>
+      </div>
+
+      <div class="art-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none"><path d="M8 18h32v18a4 4 0 01-4 4H12a4 4 0 01-4-4V18z" stroke="currentColor" stroke-width="2"/><path d="M8 18l16-10 16 10" stroke="currentColor" stroke-width="2"/></svg>
+        <h3>Cestaria</h3>
+        <div class="art-visual"> <img src="https://www.museunacional.ufrj.br/dir/exposicoes/etnologia/img/brasil_indigena/225-1.jpg" alt="Cesto Nambikwára feito com fibras vegetais" loading="lazy"></div><div class="art-caption"> Cesto Nambikwára — acervo do Museu Nacional/UFRJ. </div>
+        <p>Trançada com fibras vegetais como cipó, tucum e palha, servia para peneiras, cestos de carga e esteiras, com padrões geométricos que variam de povo para povo e podem indicar filiação a um grupo.</p>
+      </div>
+
+      <div class="art-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="4" fill="currentColor"/></svg>
+        <h3>Adornos e ourivesaria</h3>
+        <div class="art-visual"><img src="https://collections.bowers.org/internal/media/dispatcher/27456/full" alt="Fotografia de colar Kayapó feito com conchas, contas e fibras." loading="lazy"></div><div class="art-caption">Peça real: colar cerimonial Kayapó (acervo Bowers Museum).</div>
+        <p>Colares e brincos feitos de conchas, ossos, sementes e, em regiões como os Andes e partes do Brasil central, ouro e outros metais trabalhados — usados tanto no cotidiano quanto em rituais e trocas entre povos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 120 16"><path d="M0 8 Q15 0 30 8 T60 8 T90 8 T120 8" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+</div>
+
+<!-- ===================== POVOS ===================== -->
+<section id="povos" class="tinted">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">04 — Diversidade</div>
+        <h2>Não um povo, mas centenas</h2>
+      </div>
+      <p class="desc">Os historiadores agrupam essa diversidade em grandes famílias linguísticas — cada uma reunindo dezenas de povos com línguas aparentadas, mas culturas e territórios próprios.</p>
+    </div>
+
+    <div class="peoples">
+      <div class="people-card">
+        <h4>Tupi-guarani</h4>
+        <p>Predominante ao longo do litoral atlântico na época do contato, com povos como tupinambá, tupiniquim e guarani, ligados por agricultura de mandioca e redes de guerra e aliança.</p>
+      </div>
+      <div class="people-card">
+        <h4>Jê</h4>
+        <p>Concentrada no planalto central e sul, incluindo povos como kaingang e xavante, com organização social baseada em aldeias circulares e metades cerimoniais.</p>
+      </div>
+      <div class="people-card">
+        <h4>Aruák</h4>
+        <p>Presente da Amazônia ao Mato Grosso, com povos como os wauja e paresi, historicamente associados a redes de comércio regional e cerâmica elaborada.</p>
+      </div>
+      <div class="people-card">
+        <h4>Karíb</h4>
+        <p>Concentrada no norte da Amazônia, incluindo povos como os macuxi e waimiri-atroari, com forte tradição de cestaria e pintura corporal geométrica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LEGADO ===================== -->
+<section id="legado">
+  <div class="wrap legacy">
+    <div>
+      <div class="section-num">05 — Continuidade</div>
+      <h2 style="margin-top:6px; font-size:clamp(1.8rem,3.4vw,2.4rem);">Uma história que não terminou em 1500</h2>
+      <p style="margin-top:18px;">O ano 1500 costuma marcar o fim didático do "período pré-colonial", mas não marcou o fim dos povos que o viveram. Hoje, mais de 300 povos indígenas seguem no território brasileiro, falando cerca de 150 línguas e mantendo vivas — e reinventando — muitas dessas tradições: da cerâmica à pintura corporal, da arte plumária à cestaria.</p>
+      <p>Conhecer esse período não é apenas olhar para o passado. É reconhecer que a história do Brasil não começa em 1500 — ela apenas ganha, a partir daquele ano, um novo e doloroso capítulo.</p>
+    </div>
+    <div class="legacy-quote">
+      "Pindorama" — terra das palmeiras — foi um dos nomes que os povos tupi deram a esta terra, muito antes de qualquer outro nome ser escrito em um mapa.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; width:100%;">
+    <span>Pindorama — história, acontecimentos e artes do período pré-colonial</span>
+    <span>Datas e estimativas seguem o debate arqueológico em curso; novas pesquisas seguem revisando esses números.</span>
+  </div>
+</footer>
+
+</body>
+</html>
